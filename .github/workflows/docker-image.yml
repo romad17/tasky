@@ -26,12 +26,12 @@ jobs:
 
       - name: Build Docker image
         run: |
-          docker build -t ${{ secrets.REPO }}:latest .
+          docker build -t ${{ secrets.REPO }} .
 
       - name: Tag Docker image
         run: |
-          docker tag ${{ secrets.REPO }}:latest ${{ secrets.REPO }}:latest
+          docker tag ${{ secrets.REPO }}:latest 207567792559.dkr.ecr.us-east-1.amazonaws.com/${{ secrets.REPO }}:latest
 
       - name: Push Docker image to AWS ECR
         run: |
-          docker push ${{ secrets.REPO }}:latest
+          docker push 207567792559.dkr.ecr.us-east-1.amazonaws.com/${{ secrets.REPO }}:latest
