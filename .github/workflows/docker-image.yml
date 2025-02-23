@@ -22,7 +22,7 @@ jobs:
 
       - name: Log in to AWS ECR
         run: |
-          aws ecr get-login-password --region ${{ secrets.REGION }} | docker login --username AWS --password-stdin 207567792559.dkr.ecr.us-east-1.amazonaws.com
+          aws ecr get-login-password --region ${{ secrets.REGION }} | docker login --username AWS --password-stdin ${{ secrets.REPO_ADDR }}
 
       - name: Build Docker image
         run: |
@@ -30,8 +30,8 @@ jobs:
 
       - name: Tag Docker image
         run: |
-          docker tag ${{ secrets.REPO }}:latest 207567792559.dkr.ecr.us-east-1.amazonaws.com/${{ secrets.REPO }}:latest
+          docker tag ${{ secrets.REPO }}:latest ${{ secrets.REPO_ADDR }}/${{ secrets.REPO }}:latest
 
       - name: Push Docker image to AWS ECR
         run: |
-          docker push 207567792559.dkr.ecr.us-east-1.amazonaws.com/${{ secrets.REPO }}:latest
+          docker push ${{ secrets.REPO_ADDR }}/${{ secrets.REPO }}:latest
